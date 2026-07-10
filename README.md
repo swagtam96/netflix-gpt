@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ⚛️ Project Name
 
 Netfilx-Gpt
@@ -20,7 +19,9 @@ Netfilx-Gpt
 - **Frontend**: React (v19), JavaScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
-- **Routing**: React Router DOM (v7)
+- **Routing**: React Router DOM (v7)  
+  -**Form Validation**:react-hook-form  
+  -**Hooks**:
 
 ## 💻 Getting Started
 
@@ -69,9 +70,5 @@ In the project directory, you can run:
 │   └── main.jsx           # React DOM application entry point
 ├── tailwind.config.js     # Tailwind CSS styling layout
 └── package.json           # Project dependencies and operational scripts
+
 ```
-
-## 📄 License
-=======
-
->>>>>>> af455aa7280fead6a84fca2169b003a1f0a89d04

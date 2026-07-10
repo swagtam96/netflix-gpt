@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { loginBg } from "../utils/PageLinks";
 import Header from "./Header";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const toogleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <div>
       <Header />
@@ -19,7 +26,10 @@ const Login = () => {
         ></img>
       </div>
 
-      <form className="absolute flex flex-col left-[35%] top-[20%] gap-8 z-10 text-white">
+      <form
+        className="absolute flex flex-col left-[35%] top-[20%] gap-8 z-10 text-white"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className="text-3xl font-bold ">
           Enter your Info to {isSignInForm ? "SignIn" : "SignUp"}
         </h1>
@@ -28,18 +38,46 @@ const Login = () => {
             className="border rounded-md w-full h-12 p-4 bg-black/30 text-white"
             type="text"
             placeholder="Enter Full Name"
-          ></input>
+            {...register("name", {
+              required: "Name is required",
+              minLength: { value: 3, message: "Minimum length of name is 2" },
+            })}
+          />
         )}
+        {errors.name && <p className="text-red-100  ">{errors.name.message}</p>}
         <input
           className="border rounded-md w-full h-12 p-4 bg-black/30 text-white"
           type="email"
           placeholder="Enter Email address"
-        ></input>
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid Email address",
+            },
+          })}
+        />
+        {errors.email && <p className="text-red-100">{errors.email.message}</p>}
         <input
           className="border rounded-md w-full h-12 p-4 bg-black/30 text-white"
           type="password"
           placeholder="Enter Your Password"
-        ></input>
+          {...register("password", {
+            required: "password is required",
+            minlength: {
+              value: 8,
+              message: "Password must be at least 8 characters long",
+            },
+            pattern: {
+              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+              message:
+                "Password must contain at least one letter and one number",
+            },
+          })}
+        />
+        {errors.password && (
+          <p className="text-red-100">{errors.password.message}</p>
+        )}
         <button
           className="h-12 w-full text-white bg-red-600 rounded text-xl font-bold hover:bg-red-800"
           type="Submit"
