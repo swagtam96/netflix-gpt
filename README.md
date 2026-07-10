@@ -1,16 +1,73 @@
-# React + Vite
+# ⚛️ Project Name
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Netfilx-Gpt
 
-Currently, two official plugins are available:
+🔗
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Responsive UI**:
+- **State Management**: Handled cleanly via Context API .
+- **Data Fetching**:
+- **Authentication**: Secure login/signup system with JWT validation.
+- **Theme Toggle**:
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React (v19), JavaScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router DOM (v7)
+
+## 💻 Getting Started
+
+Follow these steps to clone and run the application locally on your machine.
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
+- [npm](https://npmjs.com) or [yarn](https://yarnpkg.com)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com
+   cd your-repo-name
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Available Scripts
+
+In the project directory, you can run:
+
+- `npm run dev`: Runs the app in development mode at `http://localhost:5173`.
+- `npm run build`: Bundles the app into static files for production inside the `dist/` or `build/` folder.
+- `npm run preview`: Locally previews your production build.
+
+---
+
+## 📂 Project Structure
+
+```text
+├── public/                # Static assets (favicons, icons)
+├── src/
+│   ├── assets/            # Global images and fonts
+│   ├── components/        # Reusable UI components
+│   ├── hooks/             # Custom React hooks (useAuth, useFetch)
+│   ├── App.jsx            # Main application layout and routes
+│   └── main.jsx           # React DOM application entry point
+├── tailwind.config.js     # Tailwind CSS styling layout
+└── package.json           # Project dependencies and operational scripts
+```
+
+## 📄 License
