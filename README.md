@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ⚛️ Project Name
 
 Netfilx-Gpt
@@ -71,3 +72,6 @@ In the project directory, you can run:
 ```
 
 ## 📄 License
+=======
+
+>>>>>>> af455aa7280fead6a84fca2169b003a1f0a89d04
