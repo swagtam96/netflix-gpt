@@ -1,6 +1,6 @@
 # ⚛️ Project Name
 
-Netfilx-Gpt
+Netfilx-Gpt - a clone of netflix along with chat GPT AI feature to search for movies.
 
 🔗
 
@@ -11,7 +11,7 @@ Netfilx-Gpt
 - **Responsive UI**:
 - **State Management**: Handled cleanly via Context API .
 - **Data Fetching**:
-- **Authentication**: Secure login/signup system with JWT validation.
+- **Authentication**: Secure login/signup system .
 - **Theme Toggle**:
 
 ## 🛠️ Tech Stack
@@ -19,9 +19,9 @@ Netfilx-Gpt
 - **Frontend**: React (v19), JavaScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
-- **Routing**: React Router DOM (v7)  
-  -**Form Validation**:react-hook-form  
-  -**Hooks**:
+- **Routing**: React Router DOM (v7)
+- **Authentication and deployment**:Firebase
+- **Form Validation**:react-hook-form
 
 ## 💻 Getting Started
 
@@ -67,8 +67,9 @@ In the project directory, you can run:
 │   ├── components/        # Reusable UI components
 │   ├── hooks/             # Custom React hooks (useAuth, useFetch)
 │   ├── App.jsx            # Main application layout and routes
+│   ├── index.css          # for importing tailwindcss
 │   └── main.jsx           # React DOM application entry point
-├── tailwind.config.js     # Tailwind CSS styling layout
+├── eslint.config.js       # configure ESLint foe a react application built with vite
 └── package.json           # Project dependencies and operational scripts
 
 ```

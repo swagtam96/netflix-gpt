@@ -2,18 +2,41 @@ import { useState } from "react";
 import { loginBg } from "../utils/PageLinks";
 import Header from "./Header";
 import { useForm } from "react-hook-form";
+import { loginValidation } from "../utils/formValidation";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [firebaseError, setFirebaseError] = useState("");
   const toogleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    setFirebaseError("");
+    const { email, password } = data;
+
+    try {
+      if (!isSignInForm) {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("Account created successfully!");
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Logged in successfully!");
+      }
+    } catch (error) {
+      setFirebaseError(error.message);
+    }
+  };
   return (
     <div>
       <Header />
@@ -38,51 +61,35 @@ const Login = () => {
             className="border rounded-md w-full h-12 p-4 bg-black/30 text-white"
             type="text"
             placeholder="Enter Full Name"
-            {...register("name", {
-              required: "Name is required",
-              minLength: { value: 3, message: "Minimum length of name is 2" },
-            })}
+            {...register("name", loginValidation.name)}
           />
         )}
         {errors.name && <p className="text-red-100  ">{errors.name.message}</p>}
         <input
           className="border rounded-md w-full h-12 p-4 bg-black/30 text-white"
           type="email"
+          autoComplete="on"
           placeholder="Enter Email address"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid Email address",
-            },
-          })}
+          {...register("email", loginValidation.email)}
         />
         {errors.email && <p className="text-red-100">{errors.email.message}</p>}
         <input
           className="border rounded-md w-full h-12 p-4 bg-black/30 text-white"
           type="password"
           placeholder="Enter Your Password"
-          {...register("password", {
-            required: "password is required",
-            minlength: {
-              value: 8,
-              message: "Password must be at least 8 characters long",
-            },
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              message:
-                "Password must contain at least one letter and one number",
-            },
-          })}
+          autoComplete="on"
+          {...register("password", loginValidation.password)}
         />
         {errors.password && (
           <p className="text-red-100">{errors.password.message}</p>
         )}
+        {firebaseError && <p className="text-red-100">{firebaseError}</p>}
         <button
           className="h-12 w-full text-white bg-red-600 rounded text-xl font-bold hover:bg-red-800"
           type="Submit"
+          disabled={isSubmitting}
         >
-          {isSignInForm ? "SignIn" : "SignUp"}
+          {isSubmitting ? "Processing..." : isSignInForm ? "SignIn" : "SignUp"}
         </button>
         <p className="cursor-pointer" onClick={toogleSignInForm}>
           {isSignInForm
