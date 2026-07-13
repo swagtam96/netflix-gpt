@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 const SignBtn = () => {
   return (
-    <div className=" pr-34 py-6">
-      <button className="bg-red-600 text-white rounded-sm w-20 p-1 hover:bg-red-800 cursor-pointer ">
-        <Link to="Login">Sign In</Link>
-      </button>
+    <div className="pr-34 py-6">
+      <Link
+        to="/login"
+        className="inline-flex items-center justify-center rounded-sm bg-red-600 px-4 py-2 text-white transition hover:bg-red-800"
+      >
+        Sign In
+      </Link>
     </div>
   );
 };
