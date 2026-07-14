@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../utils/firebase";
 import { loginBg } from "../utils/PageLinks";
 import Header from "./Header";
 import { useForm } from "react-hook-form";
@@ -7,13 +8,25 @@ import { loginValidation } from "../utils/formValidation";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../utils/firebase";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [firebaseError, setFirebaseError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/browse", { replace: true });
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
+
   const toogleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
@@ -23,19 +36,27 @@ const Login = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+
   const onSubmit = async (data) => {
     setFirebaseError("");
-    const { email, password } = data;
+    const { name, email, password } = data;
 
     try {
       if (!isSignInForm) {
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert("Account created successfully!");
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        if (userCredential.user) {
+          await updateProfile(userCredential.user, { displayName: name });
+        }
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        alert("Logged in successfully!");
-        navigate("/browse");
       }
+
+      navigate("/browse", { replace: true });
     } catch (error) {
       setFirebaseError(error.message);
     }

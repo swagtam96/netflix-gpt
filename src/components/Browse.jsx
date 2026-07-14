@@ -1,15 +1,26 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import Header from "./Header";
 import { auth } from "../utils/firebase";
 
 const Browse = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/", { replace: true });
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
+
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("Sign out failed:", error);
     }

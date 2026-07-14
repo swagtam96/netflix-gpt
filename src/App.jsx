@@ -1,25 +1,27 @@
 import BodyLayout from "./components/BodyLayout";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../src/utils/firebase";
-import { useEffect } from "react";
-import { addUser, removeUser } from "./utils/userSlice";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser, removeUser } from "./utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { auth } from "./utils/firebase";
 
 const App = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;
-        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
-        navigate("/browse");
+        dispatch(addUser({ uid, email, displayName }));
+        navigate("/browse", { replace: true });
       } else {
         dispatch(removeUser());
-        navigate("/");
+        navigate("/", { replace: true });
       }
     });
+
     return () => unsubscribe();
   }, [dispatch, navigate]);
 
