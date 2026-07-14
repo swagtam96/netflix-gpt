@@ -5,3 +5,7 @@ export const BgBanner =
 
 export const loginBg =
   "https://occ-0-4646-3647.1.nflxso.net/dnm/api/v6/iMyKkw5SVrkCXbCfSBEb_Pjar5Y/AAAAQBTxE26zgLJoqZnmxUCfZtVJ2HbJUsVonZ_9Uo-pn68zarPK.png";
+export const API_OPTIONS = {
+  method: "GET",
+  headers: { accept: "application/json", Authorization: `Bearer ${import.meta.env.VITE_TMDB}` },
+};

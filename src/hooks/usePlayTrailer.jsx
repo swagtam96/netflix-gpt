@@ -11,12 +11,11 @@ const usePlayingTrailer = (movieId) => {
     try {
       const data = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-        API_OPTIONS
+        API_OPTIONS,
       );
       const json = await data.json();
       const results = json.results || [];
 
-      // Prefer YouTube trailer of type 'Trailer', then 'Official Trailer', then any YouTube video, then first result
       const trailer =
         results.find((v) => v.type === "Trailer" && v.site === "YouTube") ||
         results.find((v) => v.name === "Official Trailer") ||

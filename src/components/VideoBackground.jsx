@@ -4,7 +4,7 @@ import usePlayingTrailer from "../hooks/usePlayTrailer";
 const VideoBackground = ({ movieId }) => {
   const playMovieTrailer = useSelector((store) => store.movies?.trailerVideo);
   usePlayingTrailer(movieId);
-  // only render iframe when we have a YouTube key
+
   if (!playMovieTrailer?.key) {
     return <div className="w-screen aspect-video bg-black" />;
   }

@@ -11,11 +11,9 @@ const movieSlice = createSlice({
       state.nowPlayingMovies = action.payload;
     },
     addMovieTrailer: (state, action) => {
-      // store the single trailer object (or null) in trailerVideo
       state.trailerVideo = action.payload;
     },
   },
-
 });
 export const { addNowPLayingMovies, addMovieTrailer } = movieSlice.actions;
 export default movieSlice.reducer;

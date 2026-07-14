@@ -10,7 +10,7 @@ Netfilx-Gpt - a clone of netflix along with chat GPT AI feature to search for mo
 
 - **Responsive UI**:
 - **State Management**: Handled cleanly via Context API .
-- **Data Fetching**:
+- **Data Fetching**: TMDB
 - **Authentication**: Secure login/signup system .
 - **Theme Toggle**:
 
